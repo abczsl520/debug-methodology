@@ -157,6 +157,33 @@ User says "it broke after you changed X" → immediately diff X.
 □ If broken → revert, THEN debug
 ```
 
+## 🚨 Server Code Modification Rules
+
+**Every code change on a server MUST be syntax-verified before restart/reload.**
+
+```
+After editing .js files:
+  □ node -c <file>                          # Syntax check
+  □ node -e "require('./<file>')"           # Module load check (for route files)
+  □ FAIL → DO NOT restart. DO NOT tell user to refresh. Fix first.
+
+After editing .html files:
+  □ Check critical tag closure (div/script/style)
+  □ grep -c '<div' file && grep -c '</div' file   # Count match
+
+Complex multi-line changes:
+  □ Write complete file locally → scp upload
+  □ NEVER use sed for multi-line code insertion (newlines get swallowed)
+  □ If sed is unavoidable → verify with node -c immediately after
+
+Restart sequence:
+  □ node -c *.js passes → pm2 restart <app>
+  □ Check pm2 logs --lines 5 for startup errors
+  □ curl health endpoint to confirm service is up
+```
+
+**Why**: `sed -i` multi-line insertion silently corrupts JS (newlines become single line), causing syntax errors that break the entire page with no visible error to the user.
+
 ## Decision Tree
 
 ```
