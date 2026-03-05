@@ -148,14 +148,19 @@ User says "it broke after you changed X" → immediately diff X.
 
 ## Deployment Safety
 
+**Iron Rule: NEVER edit files directly on the server. NEVER overwrite server files blindly.**
+
 ```
-□ Pull latest from server first
-□ Backup current working version
-□ Make changes on latest
-□ Deploy with same startup method
-□ Verify immediately
-□ If broken → revert, THEN debug
+1. Pull latest from server to local    (scp/git pull)
+2. Make changes on the local copy
+3. Backup server's current version      (cp file file.bak.$(date +%s))
+4. Upload modified files to server      (scp/git push)
+5. Restart with SAME method as original (pm2 restart / .venv/bin/python3)
+6. Verify immediately                   (curl + logs)
+7. If broken → revert backup, THEN debug
 ```
+
+Why: Direct server edits (especially `sed -i`) silently corrupt files. No local diff, no undo, no safety net.
 
 ## 🚨 Server Code Modification Rules
 
