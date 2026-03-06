@@ -1,5 +1,9 @@
 # 🔍 Debug Methodology
 
+[![ClawHub](https://img.shields.io/badge/ClawHub-debug--methodology-blue?style=flat-square)](https://clawhub.com)
+[![License: MIT](https://img.shields.io/badge/License-MIT-green?style=flat-square)](LICENSE)
+[![OpenClaw Skill](https://img.shields.io/badge/OpenClaw-Agent_Skill-orange?style=flat-square)](https://github.com/openclaw/openclaw)
+
 **系统化调试方法论** — 适用于 AI Agent 和开发者的通用调试规范。
 
 > 从真实生产事故中提炼，结合 Nicole Tietz、Brendan Gregg、Julia Evans 等业界顶级工程师的方法论。
@@ -63,9 +67,25 @@ cp SKILL.md ~/.agents/skills/debug-methodology/
 
 由此总结出这套通用调试规范，并结合业界最佳实践形成了完整的方法论。
 
+## Install
+
+```bash
+clawhub install debug-methodology
+```
+
 ## Wiki
 
 更详细的案例分析和扩展内容请查看 [Wiki](../../wiki)。
+
+## 🔗 Part of the AI Dev Quality Suite
+
+| Skill | Purpose | Install |
+|-------|---------|---------|
+| [bug-audit](https://github.com/abczsl520/bug-audit-skill) | Dynamic bug hunting, 200+ pitfall patterns | `clawhub install bug-audit` |
+| [codex-review](https://github.com/abczsl520/codex-review) | Three-tier code review with adversarial testing | `clawhub install codex-review` |
+| **debug-methodology** (this) | Root-cause debugging, prevents patch-chaining | `clawhub install debug-methodology` |
+| [nodejs-project-arch](https://github.com/abczsl520/nodejs-project-arch) | AI-friendly architecture, 70-93% token savings | `clawhub install nodejs-project-arch` |
+| [game-quality-gates](https://github.com/abczsl520/game-quality-gates) | 12 universal game dev quality checks | `clawhub install game-quality-gates` |
 
 ## License
 
